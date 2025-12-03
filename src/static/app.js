@@ -1,4 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Theme toggle elements
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+
+  // Theme toggle functionality
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", newTheme);
+    applyTheme(newTheme);
+  }
+
+  // Initialize theme on page load
+  initializeTheme();
+
+  // Add event listener for theme toggle
+  themeToggle.addEventListener("click", toggleTheme);
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
