@@ -519,6 +519,22 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // Create share buttons HTML
+    const shareButtonsHtml = `
+      <div class="share-buttons">
+        <span class="share-label">Share:</span>
+        <button class="share-button share-twitter" data-activity="${name}" title="Share on X (Twitter)">
+          𝕏
+        </button>
+        <button class="share-button share-facebook" data-activity="${name}" title="Share on Facebook">
+          f
+        </button>
+        <button class="share-button share-email" data-activity="${name}" title="Share via Email">
+          ✉
+        </button>
+      </div>
+    `;
+
     activityCard.innerHTML = `
       ${tagHtml}
       <h4>${name}</h4>
@@ -552,6 +568,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .join("")}
         </ul>
       </div>
+      ${shareButtonsHtml}
       <div class="activity-card-actions">
         ${
           currentUser
@@ -575,6 +592,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButtons = activityCard.querySelectorAll(".delete-participant");
     deleteButtons.forEach((button) => {
       button.addEventListener("click", handleUnregister);
+    });
+
+    // Add click handlers for share buttons
+    const twitterButton = activityCard.querySelector(".share-twitter");
+    const facebookButton = activityCard.querySelector(".share-facebook");
+    const emailButton = activityCard.querySelector(".share-email");
+
+    twitterButton.addEventListener("click", () => {
+      const text = encodeURIComponent(`Check out ${name} at Mergington High School! ${details.description}`);
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=550,height=420');
+    });
+
+    facebookButton.addEventListener("click", () => {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=550,height=420');
+    });
+
+    emailButton.addEventListener("click", () => {
+      const subject = encodeURIComponent(`Check out ${name} at Mergington High School!`);
+      const body = encodeURIComponent(`I found this activity that might interest you:\n\n${name}\n${details.description}\n\nSchedule: ${formattedSchedule}\n\nLearn more: ${window.location.href}`);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
     });
 
     // Add click handler for register button (only when authenticated)
