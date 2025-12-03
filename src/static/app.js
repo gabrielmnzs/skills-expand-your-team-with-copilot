@@ -523,13 +523,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const shareButtonsHtml = `
       <div class="share-buttons">
         <span class="share-label">Share:</span>
-        <button class="share-button share-twitter" data-activity="${name}" title="Share on X (Twitter)">
+        <button class="share-button share-twitter" data-activity="${name}" title="Share on X (Twitter)" aria-label="Share on X (Twitter)">
           𝕏
         </button>
-        <button class="share-button share-facebook" data-activity="${name}" title="Share on Facebook">
+        <button class="share-button share-facebook" data-activity="${name}" title="Share on Facebook" aria-label="Share on Facebook">
           f
         </button>
-        <button class="share-button share-email" data-activity="${name}" title="Share via Email">
+        <button class="share-button share-email" data-activity="${name}" title="Share via Email" aria-label="Share via Email">
           ✉
         </button>
       </div>
